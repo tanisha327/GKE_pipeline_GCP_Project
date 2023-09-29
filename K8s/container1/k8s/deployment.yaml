@@ -1,0 +1,32 @@
+#Below code has been referred from https://medium.com/google-cloud/kubernetes-110-your-first-deployment-bf123c1d3f8
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: container1-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: container1-app
+  template:
+    metadata:
+      labels:
+        app: container1-app
+      annotations:
+        cloud.google.com/neg: '{"ingress": true}' # Optional: Enables GKE Network Endpoint Groups for the deployment
+    spec:
+      containers:
+        - name: container1
+          image: us-east4-docker.pkg.dev/assignment3-k8s/dockerimages/container1
+          ports:
+            - containerPort: 6000
+          volumeMounts:
+            - name: assignment3-persistent-volume
+              mountPath: /Tanisha_PV_dir
+      volumes:
+        - name: assignment3-persistent-volume
+          persistentVolumeClaim:
+            claimName: assignment3-persistent-volume-claim
+      imagePullSecrets:
+        - name: assignment3-registry-secret

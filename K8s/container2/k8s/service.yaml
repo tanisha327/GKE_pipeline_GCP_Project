@@ -1,0 +1,14 @@
+#Below code has been referred and taken from https://cloud.google.com/kubernetes-engine/docs/concepts/service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: container2-app
+spec:
+  selector:
+    app: container2-app
+  ports:
+    - protocol: TCP
+      port: 7000
+      targetPort: 7000
+  type: ClusterIP

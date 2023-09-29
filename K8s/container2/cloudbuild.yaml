@@ -1,0 +1,39 @@
+#Below code has been referred from https://cloud.google.com/build/docs/configuring-builds/create-basic-configuration
+
+steps:
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-east4-docker.pkg.dev/$PROJECT_ID/dockerimages/container2', './container2']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-east4-docker.pkg.dev/$PROJECT_ID/dockerimages/container2']
+ 
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['apply', '-f', 'k8s/']
+    env:
+    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=assignment3-cluster'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: [
+    'set', 
+    'image', 
+    'deployment/container2-app', 
+    'container2=us-east4-docker.pkg.dev/assignment3-k8s/dockerimages/container2'] 
+    env:
+    - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=assignment3-cluster'
+
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args:
+      - 'rollout'
+      - 'restart'
+      - 'deployment/container2-app'
+    env:
+      - 'CLOUDSDK_COMPUTE_ZONE=us-central1-a'
+      - 'CLOUDSDK_CONTAINER_CLUSTER=assignment3-cluster'
+  
+images:
+  - 'us-east4-docker.pkg.dev/$PROJECT_ID/dockerimages/container2'
+
+

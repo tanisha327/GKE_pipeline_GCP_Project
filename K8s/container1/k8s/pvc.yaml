@@ -1,0 +1,13 @@
+#Below code has been referred and taken from https://cloud.google.com/kubernetes-engine/docs/concepts/persistent-volumes
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: assignment3-persistent-volume-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+
