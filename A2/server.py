@@ -10,10 +10,10 @@ class EC2OperationsServicer(computeandstorage_pb2_grpc.EC2OperationsServicer):
     #Source: https://stackoverflow.com/questions/45981950/how-to-specify-credentials-when-connecting-to-boto3-s3
     s3 = boto3.client(
         's3',
-        aws_access_key_id="ASIAX36PRZ74AHW76SYC",
-        aws_secret_access_key="T7a5ffOt5bhZImScubnEfNKk4IEM8GOYPUG2n8J8",
+        aws_access_key_id="",
+        aws_secret_access_key="",
         
-aws_session_token="FwoGZXIvYXdzEIj//////////wEaDIEjrj5W4ASBtJtzjiLAAbTJVDR7IfooY5OFOUGFo8w+YN6L9vkVqywrQrhZfHGqnMKPRUEhXY7SauHw3G2wBQd7vIrbeNM9n4kTfIsXH+h+/3VzmuV5nPHCb7Ws+PG9QCdRq0tZQq2dZd9tqOW/SovCYvnRsP55PApJGpahKCP4edJDSgZR2aTgiFDz/LwcQ6nq9AF71PnrNR8BlU/bIRfDZPCp/ywu4UehdnUQEpkimIB2YSf8erH3si/K/o7NuzP1qkJpeEpm3nYzTbRN/Cjar5ekBjItrNlkmLNaTnCVQAJYGVqiTn4cOA2LfqHDexLkFFZmK6/sV7p1pfZC3TrZJTzF"
+aws_session_token=""
     )
     s3storage = 'a2-bucket-grpc'
     text = 'welcome.txt'
