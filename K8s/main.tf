@@ -36,20 +36,6 @@ resource "google_container_node_pool" "assignment3-node-pool" {
     machine_type = "n1-standard-2"
     disk_size_gb = 10
  
-    metadata = {
-      "gce-container-declaration" = <<EOF
-spec:
-  volumes:
-    - name: assignment3-persistent-volume
-      gcePersistentDisk:
-        pdName: assignment3-pd-name
-        fsType: ext4
-        partition: 0
-  volumeMounts:
-    - name: assignment3-persistent-volume
-      mountPath: /Tanisha_PV_dir
-EOF
-    }
   }
 }
 
